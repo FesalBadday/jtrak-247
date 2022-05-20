@@ -47,6 +47,9 @@
 
                         label.textContent = e.Name;
 
+                        // Adds the id for the item
+                        label.htmlFor = e.Id;
+
                         const item = document.createElement('li');
 
                         item.appendChild(checkbox);
@@ -63,13 +66,25 @@
             const button = document.getElementById('completeButton');
 
             button.addEventListener('click', function (e) {
-                // Get all the selected checkboxes to figure out the ids
-                const selectedCheckboxes = document.querySelectorAll('input[type=checkbox]:checked');
-                let payload = {
-                    selectedEquipment: Array.prototype.map.call(selectedCheckboxes, e => e.dataset.Id)
-                };
+                // Get user name
+                const userName = document.getElementById('name');
+                // Check if user entered a name
+                if (userName.value) {
 
-                console.log(JSON.stringify(payload));
+                    // Get all the selected checkboxes to figure out the ids
+                    const selectedCheckboxes = document.querySelectorAll('input[type=checkbox]:checked');
+
+                    let payload = {
+                        name: userName.value, selectedEquipment: Array.prototype.map.call(selectedCheckboxes, e => Number(e.dataset.id))
+                    };
+
+                    console.log(JSON.stringify([payload]));
+                // If name is empty
+                } else {
+                    // Show alert message and focus on name input field
+                    alert("Please enter your name")
+                    userName.focus();
+                }
             });
         }
     };
