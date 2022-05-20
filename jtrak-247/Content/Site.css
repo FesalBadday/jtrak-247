@@ -22,3 +22,13 @@ select,
 textarea {
     max-width: 280px;
 }
+
+/*  Remove bullet points */
+li {
+    list-style: none;
+}
+
+/*  Adds space between checkboxes and labels */
+input[type="checkbox"] {
+    margin-right: 6px;
+}
